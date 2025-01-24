@@ -1,1 +1,6 @@
-<p>cadastrar works!</p>
+<h3>Cadastre as suas notas</h3>
+<input type="text" #inputElement>
+<button (click)="addToArray(inputElement.value)">Add</button>
+<ul>
+    <li *ngFor="let item of items">{{ item }}</li>
+</ul>
