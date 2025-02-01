@@ -58,5 +58,5 @@ jobs:
           sudo docker stop meuapp
           sudo docker remove meuapp
           sudo docker pull arturis/meuapp:main
-          sudo docker run -p 80:80 -name "meuapp" -d arturis/meuapp:main
+          sudo docker run -p 80:80 --name "meuapp" -d arturis/meuapp:main
           ENDSSH
