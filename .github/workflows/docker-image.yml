@@ -28,7 +28,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: arturis/meuapp
+          images: ${{ env.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_HUB_REPOSITORY }}
 
       - name: Build and push Docker image
         id: push
@@ -37,8 +37,12 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: |
+            ${{ steps.meta.outputs.tags }}
+            ${{ env.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_HUB_REPOSITORY }}:latest
+            ${{ env.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_HUB_REPOSITORY }}:${{ github.sha }}
           labels: ${{ steps.meta.outputs.labels }}
+          
   run_on_server:
     name: Deploy on Server
     runs-on: ubuntu-latest
